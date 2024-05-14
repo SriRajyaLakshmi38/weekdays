@@ -1,5 +1,6 @@
 import Select from "react-select";
 import styles from "./Filter.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const minExp = [
   { value: 1, label: "1" },
@@ -82,6 +83,17 @@ const remoteOptions = [
 ];
 
 export default function Filters() {
+  const filters = useSelector((state) => state.filters);
+  const dispatch = useDispatch();
+
+  const handleFilterChange = (identifier, selectedValue) => {
+    dispatch({
+      type: "handleFilterChange",
+      identifier: identifier,
+      selectedValue: selectedValue,
+    });
+    dispatch({ type: "filtersApply" });
+  };
   return (
     <>
       <div className={styles.filtersContainer}>
@@ -91,6 +103,9 @@ export default function Filters() {
           blurInputOnSelect
           placeholder="Minimum Experience"
           options={minExp}
+          onChange={(event) => {
+            handleFilterChange("minExp", event);
+          }}
         />
         <Select
           isMulti
@@ -98,6 +113,9 @@ export default function Filters() {
           blurInputOnSelect
           placeholder="Company Name"
           options={companyNames}
+          onChange={(event) => {
+            handleFilterChange("companyName", event);
+          }}
         />
         <Select
           isMulti
@@ -105,6 +123,9 @@ export default function Filters() {
           blurInputOnSelect
           placeholder="Location"
           options={location}
+          onChange={(event) => {
+            handleFilterChange("location", event);
+          }}
         />
         <Select
           isMulti
@@ -112,18 +133,27 @@ export default function Filters() {
           blurInputOnSelect
           placeholder="Role"
           options={jobRole}
+          onChange={(event) => {
+            handleFilterChange("jobRole", event);
+          }}
         />
         <Select
           backspaceRemovesValue
           blurInputOnSelect
           placeholder="Minimum Base Pay"
           options={minJdSalary}
+          onChange={(event) => {
+            handleFilterChange("minJdSalary", event);
+          }}
         />
         <Select
           backspaceRemovesValue
           blurInputOnSelect
           placeholder="Remote"
           options={remoteOptions}
+          onChange={(event) => {
+            handleFilterChange("remote", event);
+          }}
         />
       </div>
     </>
