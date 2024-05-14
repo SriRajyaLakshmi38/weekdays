@@ -1,5 +1,6 @@
 import styles from "./Jobs.module.css";
 import { Box, Button } from "@mui/material";
+import { useDispatch } from "react-redux";
 
 export default function JobCard({
   jdUid,
@@ -10,6 +11,11 @@ export default function JobCard({
   jobDetailsFromCompany,
   minExp,
 }) {
+  const dispatch = useDispatch();
+
+  const handleBtnClick = (uid) => {
+    dispatch({ type: "setDialog", uid: uid });
+  };
   return (
     <>
       <div className={styles.jobcard}>
@@ -43,6 +49,9 @@ export default function JobCard({
           variant="contained"
           sx={{ mt: 2, mx: "auto" }}
           className={styles.viewBtn}
+          onClick={() => {
+            handleBtnClick(jdUid);
+          }}
         >
           View Job
         </Button>
