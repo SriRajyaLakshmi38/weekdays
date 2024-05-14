@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import JobCard from "./JobCard.jsx";
+import Dialog from "../Dialog/Dialog.jsx";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,6 +17,7 @@ export default function Jobs() {
   }, [page]);
   return (
     <Box className="container">
+      <Dialog />
       {filtersApplied ? (
         filteredJobs.length > 0 ? (
           filteredJobs.map((job) => <JobCard key={job.jdUid} {...job} />)

@@ -4,6 +4,18 @@
   gap: 1rem;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFoundText {
+  color: red;
+  grid-column: 1 / span 4;
+  text-align: center;
+}
+
 /* media queries for tab */
 @media screen and (max-width: 768px) {
   .container {
